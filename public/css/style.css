@@ -1,0 +1,50 @@
+#info {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 5%;
+    display: grid;
+    grid-template-columns: auto auto;
+    text-align: center;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: white;
+    font-weight: bold;
+}
+#actions {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    margin: 10px;
+}
+#categories{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+}
+
+.btn-block+.btn-block{
+    margin-top: 0%;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        background-image: url("../images/background.jpg");
+    }
+    #categories{
+        margin-top: 20px;
+    }
+	.ibutton{
+        height: 50px;
+    }
+	.abutton{
+        height: 90px;
+    }
+    .ifield{
+        text-align: center;
+        /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+        height: 35px;
+    }
+} 
