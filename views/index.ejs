@@ -1,8 +1,8 @@
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 </head>
@@ -20,19 +20,19 @@
             <input class="ifield form-control" oninput="calc()" id="nonum" value=<%=values.no %>>
         </div>
         <div id="np">
-            <button class='ibutton btn btn-primary btn-block' id="plusnp" onclick="plusnp()">+NP</button>
-            <button class='ibutton btn btn-danger btn-block' id="minusnp" onclick="minusnp()">-NP</button>
-            <input class="ifield form-control" oninput="calc()" id="npnum" value=<%=values.np %>>
+            <button class='ibutton btn btn-primary btn-block' id="plussu" onclick="plussu()">+SU</button>
+            <button class='ibutton btn btn-danger btn-block' id="minussu" onclick="minussu()">-SU</button>
+            <input class="ifield form-control" oninput="calc()" id="sunum" value=<%=values.su %>>
         </div>
     </div>
     <div id="info">
         <div id="signuppercent">
             <p>Sign Ups</p>
-            <p>0.00%</p>
+            <p id="signupnum">0.00%</p>
         </div>
         <div id="usagepercent">
             <p>Usage</p>
-            <p>0.00%</p>
+            <p id="usagenum">0.00%</p>
         </div>
     </div>
     <div id="actions">
@@ -49,6 +49,57 @@
             <button class='abutton btn btn-secondary btn-block' id="pub">Retrieve</button>
         </div>
     </div>
-
-
 </body>
+<script>
+    function calc() {
+        let yes = parseInt(document.getElementById("yesnum").value)
+        let no = parseInt(document.getElementById("nonum").value)
+        let su = parseInt(document.getElementById("sunum").value)
+
+        let denom = yes + no + su
+        if (denom == 0) {
+            denom = 1
+        }
+        let signups = ((yes / denom) * 100).toFixed(2)
+        document.getElementById("signupnum").innerHTML = String(signups) + "%"
+        let usage = (((yes + su) / denom) * 100).toFixed(2)
+        document.getElementById("usagenum").innerHTML = String(usage) + "%"
+    }
+    function plusyes() {
+        let num = parseInt(document.getElementById("yesnum").value)
+        document.getElementById("yesnum").value = num + 1
+        calc()
+    }
+    function minusyes() {
+        let num = parseInt(document.getElementById("yesnum").value)
+        if (num != 0) {
+            document.getElementById("yesnum").value = num - 1
+        }
+        calc()
+    }
+    function plusno() {
+        let num = parseInt(document.getElementById("nonum").value)
+        document.getElementById("nonum").value = num + 1
+        calc()
+    }
+    function minusno() {
+        let num = parseInt(document.getElementById("nonum").value)
+        if (num != 0) {
+            document.getElementById("nonum").value = num - 1
+        }
+        calc()
+    }
+    function plussu() {
+        let num = parseInt(document.getElementById("sunum").value)
+        document.getElementById("sunum").value = num + 1
+        calc()
+    }
+    function minussu() {
+        let num = parseInt(document.getElementById("sunum").value)
+        if (num != 0) {
+            document.getElementById("sunum").value = num - 1
+        }
+        calc()
+    }
+
+</script>

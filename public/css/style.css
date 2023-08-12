@@ -47,4 +47,8 @@
         /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
         height: 35px;
     }
+    html, body {
+        margin: 0; height: 100%; overflow: hidden
+    }
+
 } 

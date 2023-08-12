@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model published_data {
+  published_data_id Int      @id @default(autoincrement())
+  employee_id       String   @db.VarChar(45)
+  date              DateTime @db.Date
+  yes               Int?
+  no                Int?
+  su                Int?
+  su_percent        String?  @db.VarChar(45)
+  usage_percent     String?  @db.VarChar(45)
+}
