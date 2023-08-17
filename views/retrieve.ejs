@@ -1,0 +1,41 @@
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+</head>
+
+<body>
+    <h2 id="retrieve-title">Retrieve</h2>
+    <div class="suspension-grid">
+        <p class="suspension-grid-item suspension-grid-title">Date</p>
+        <p class="suspension-grid-item suspension-grid-title">Yes</p>
+        <p class="suspension-grid-item suspension-grid-title">No</p>
+        <p class="suspension-grid-item suspension-grid-title">SU</p>
+        <p class="suspension-grid-item suspension-grid-title">Actions</p>
+        <% for (item in data){ %>
+            <p class="suspension-grid-item">
+                <%= data[item].date %>
+            </p>
+            <p class="suspension-grid-item">
+                <%= data[item].yes %>
+            </p>
+            <p class="suspension-grid-item">
+                <%= data[item].no %>
+            </p>
+            <p class="suspension-grid-item">
+                <%= data[item].su %>
+            </p>
+            <span >
+                <form class="suspension-grid-item" action="/retrieve" method="post">
+                    <a class="btn btn-success" style="color: white;" href="http://localhost:8000/?yes=<%= data[item].yes %>&no=<%= data[item].no %>&su=<%= data[item].su %>">Pull</a>
+                    <input name="id" class="hidden-attr" value="<%= data[item].suspended_data_id %>">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </span>
+            <% } %>
+    </div>
+    <footer><a href="/" class="btn btn-info">Back</a></footer>
+</body>

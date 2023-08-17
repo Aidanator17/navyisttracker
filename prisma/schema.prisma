@@ -8,12 +8,22 @@ datasource db {
 }
 
 model published_data {
-  published_data_id Int      @id @default(autoincrement())
-  employee_id       String   @db.VarChar(45)
-  date              DateTime @db.Date
+  published_data_id Int       @id @default(autoincrement())
+  employee_id       String    @db.VarChar(45)
+  date              DateTime? @db.DateTime(0)
   yes               Int?
   no                Int?
   su                Int?
-  su_percent        String?  @db.VarChar(45)
-  usage_percent     String?  @db.VarChar(45)
+  su_percent        String?   @db.VarChar(45)
+  usage_percent     String?   @db.VarChar(45)
+  total_trans       Int?
+}
+
+model suspended_data {
+  suspended_data_id Int       @id @default(autoincrement())
+  employee_id       String    @db.VarChar(45)
+  date              DateTime? @db.DateTime(0)
+  yes               Int?
+  no                Int?
+  su                Int?
 }

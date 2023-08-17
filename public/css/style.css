@@ -29,6 +29,29 @@
     margin-top: 0%;
 }
 
+.hidden-attr {
+    display: none;
+}
+
+#retrieve-title {
+    background-color: white;
+}
+.suspension-grid{
+    background-color: white;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: auto;
+    align-items: center;
+    text-align: center;
+}
+.suspension-grid-item {
+    margin: 0;
+    padding: 10px;
+}
+.suspension-grid-title {
+    font-weight: bold;
+}
+
 @media screen and (max-width: 500px) {
     body {
         background-image: url("../images/background.jpg");
@@ -41,6 +64,7 @@
     }
 	.abutton{
         height: 90px;
+        color: white;
     }
     .ifield{
         text-align: center;

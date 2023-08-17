@@ -36,17 +36,36 @@
         </div>
     </div>
     <div id="actions">
-        <div id="publish">
-            <button class='abutton btn btn-success btn-block' id="pub">Publish</button>
-        </div>
+        <form action="/" method="POST">
+            <div id="publish">
+                <div class="hidden-attr">
+                    <input name="pyes" id="publish-yes" value=<%=values.yes %>>
+                    <input name="pno" id="publish-no" value=<%=values.no %>>
+                    <input name="psu" id="publish-su" value=<%=values.su %>>
+                </div>
+                <button class='abutton btn btn-success btn-block' id="pub">Publish</button>
+            </div>
+        </form>
         <div id="rundown">
-            <button class='abutton btn btn-info btn-block' id="pub">Rundown</button>
+            <form action="/rundown" method="GET">
+                <button class='abutton btn btn-info btn-block' id="pub">Rundown</button>
+            </form>
         </div>
-        <div id="suspend">
-            <button class='abutton btn btn-secondary btn-block' id="pub">Suspend</button>
-        </div>
+
+        <form action="/suspend" method="POST">
+            <div id="suspend">
+                <div class="hidden-attr">
+                    <input name="syes" id="suspend-yes" value=<%=values.yes %>>
+                    <input name="sno" id="suspend-no" value=<%=values.no %>>
+                    <input name="ssu" id="suspend-su" value=<%=values.su %>>
+                </div>
+                <button class='abutton btn btn-secondary btn-block' id="pub">Suspend</button>
+            </div>
+        </form>
         <div id="retrieve">
-            <button class='abutton btn btn-secondary btn-block' id="pub">Retrieve</button>
+            <form action="/retrieve" method="GET">
+                <button class='abutton btn btn-secondary btn-block' id="pub">Retrieve</button>
+            </form>
         </div>
     </div>
 </body>
@@ -64,6 +83,15 @@
         document.getElementById("signupnum").innerHTML = String(signups) + "%"
         let usage = (((yes + su) / denom) * 100).toFixed(2)
         document.getElementById("usagenum").innerHTML = String(usage) + "%"
+
+        document.getElementById("publish-yes").value = document.getElementById("yesnum").value
+        document.getElementById("suspend-yes").value = document.getElementById("yesnum").value
+
+        document.getElementById("publish-no").value = document.getElementById("nonum").value
+        document.getElementById("suspend-no").value = document.getElementById("nonum").value
+
+        document.getElementById("publish-su").value = document.getElementById("sunum").value
+        document.getElementById("suspend-su").value = document.getElementById("sunum").value
     }
     function plusyes() {
         let num = parseInt(document.getElementById("yesnum").value)
