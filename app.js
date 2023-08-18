@@ -6,7 +6,7 @@ const PrismaClient = require('@prisma/client').PrismaClient
 const prisma = new PrismaClient()
 const prisma_functions = require("./prisma/prisma_controller");
 const { stat } = require('fs');
-const url = "http://localhost:8000/"
+const url = "https://wild-rose-antelope-veil.cyclic.cloud/"
 
 
 const app = express();
