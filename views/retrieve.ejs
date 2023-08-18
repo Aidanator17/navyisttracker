@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h2 id="retrieve-title">Retrieve</h2>
+    <h2 class="page-title">Retrieve</h2>
     <div class="suspension-grid">
         <p class="suspension-grid-item suspension-grid-title">Date</p>
         <p class="suspension-grid-item suspension-grid-title">Yes</p>
@@ -30,7 +30,7 @@
             </p>
             <span >
                 <form class="suspension-grid-item" action="/retrieve" method="post">
-                    <a class="btn btn-success" style="color: white;" href="http://localhost:8000/?yes=<%= data[item].yes %>&no=<%= data[item].no %>&su=<%= data[item].su %>">Pull</a>
+                    <a class="btn btn-success" style="color: white;" href="<%= url %>?yes=<%= data[item].yes %>&no=<%= data[item].no %>&su=<%= data[item].su %>">Pull</a>
                     <input name="id" class="hidden-attr" value="<%= data[item].suspended_data_id %>">
                     <button class="btn btn-danger">Delete</button>
                 </form>

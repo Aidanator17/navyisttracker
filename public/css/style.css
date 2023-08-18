@@ -33,7 +33,10 @@
     display: none;
 }
 
-#retrieve-title {
+.page-title {
+    background-color: white;
+}
+.page-subtitle {
     background-color: white;
 }
 .suspension-grid{
@@ -49,6 +52,49 @@
     padding: 10px;
 }
 .suspension-grid-title {
+    font-weight: bold;
+}
+
+#rundown-grid{
+    margin-top: 10px;
+    height: 200px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    background-color: white;
+    overflow-y:auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.rundown-item {
+    margin: 0;
+}
+#totals-grid{
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+
+}
+#recents-grid{
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+
+}
+.stats-title {
+    margin: 0;
+}
+.stats-left {
+    justify-self: right;
+}
+.stat-value {
     font-weight: bold;
 }
 

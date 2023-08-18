@@ -38,6 +38,14 @@ const prisma_functions = {
               suspended_data_id: id,
             },
           })
+    },
+    rundown: async function(id) {
+        const data = await prisma.published_data.findMany({
+            where:{
+                employee_id: id
+            }
+        })
+        return data
     }
 }
 

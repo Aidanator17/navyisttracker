@@ -1,0 +1,97 @@
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+</head>
+
+<body>
+    <h2 class="page-title" style="margin: 0;">Rundown</h2><p class="page-subtitle">(<%= data.length %> publishes)</p>
+    <div id='rundown-grid'>
+        <h4>Date</h4>
+        <h4>Sign Up %</h4>
+        <h4>Yes</h4>
+        <h4>No</h4>
+        <h4>SU</h4>
+        <h4>Usage</h4>
+        <% for (day in data){ %>
+            <p class="rundown-item">
+                <%= data[day].date %>
+            </p>
+            <p class="rundown-item">
+                <%= data[day].su_percent %>
+            </p>
+            <p class="rundown-item">
+                <%= data[day].yes %>
+            </p>
+            <p class="rundown-item">
+                <%= data[day].no %>
+            </p>
+            <p class="rundown-item">
+                <%= data[day].su %>
+            </p>
+            <p class="rundown-item">
+                <%= data[day].usage_percent %>
+            </p>
+            <% } %>
+    </div>
+    <div id="totals-grid">
+        <h4 class="stats-title stats-left">Total</h4>
+        <h4 class="stats-title">Stats</h4>        
+        <p class="rundown-item stats-left">Sign up %</p>
+        <p class="rundown-item stat-value">
+            <%= stats.signup_per %>
+        </p>
+        <p class="rundown-item stats-left">Usage</p>
+        <p class="rundown-item stat-value">
+            <%= stats.usage_per %>
+        </p>
+        <p class="rundown-item stats-left">Total Trans</p>
+        <p class="rundown-item stat-value">
+            <%= stats.trans_count %>
+        </p>
+        <p class="rundown-item stats-left">Yes</p>
+        <p class="rundown-item stat-value">
+            <%= stats.total_yes %>
+        </p>
+        <p class="rundown-item stats-left">No</p>
+        <p class="rundown-item stat-value">
+            <%= stats.total_no %>
+        </p>
+        <p class="rundown-item stats-left">SU</p>
+        <p class="rundown-item stat-value">
+            <%= stats.total_su %>
+        </p>
+    </div>
+    <div id="recents-grid">
+        <h4 class="stats-title stats-left">Recent</h4><h4 class="stats-title">Stats</h4>
+        <p class="rundown-item stats-left">(based on <%= recent_cap %></p><p class="rundown-item">past publishes)</p>
+        <p class="rundown-item stats-left">Sign up %</p>
+        <p class="rundown-item stat-value">
+            <%= stats.recent_signup_per %>
+        </p>
+        <p class="rundown-item stats-left">Usage</p>
+        <p class="rundown-item stat-value">
+            <%= stats.recent_usage_per %>
+        </p>
+        <p class="rundown-item stats-left">Total Trans</p>
+        <p class="rundown-item stat-value">
+            <%= stats.recent_trans_count %>
+        </p>
+        <p class="rundown-item stats-left">Yes</p>
+        <p class="rundown-item stat-value">
+            <%= stats.recent_yes %>
+        </p>
+        <p class="rundown-item stats-left">No</p>
+        <p class="rundown-item stat-value">
+            <%= stats.recent_no %>
+        </p>
+        <p class="rundown-item stats-left">SU</p>
+        <p class="rundown-item stat-value">
+            <%= stats.recent_su %>
+        </p>
+    </div>
+    <footer><a href="/" class="btn btn-info">Back</a></footer>
+</body>
