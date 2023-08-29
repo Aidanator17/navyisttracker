@@ -27,12 +27,18 @@
     </div>
     <div id="info">
         <div id="signuppercent">
-            <p>Sign Ups</p>
+            <p class="infotitle">Sign Ups</p>
             <p id="signupnum">0.00%</p>
         </div>
         <div id="usagepercent">
-            <p>Usage</p>
+            <p class="infotitle">Usage</p>
             <p id="usagenum">0.00%</p>
+        </div>
+        <div class="scores">
+            <p id="signupscore"></p>
+        </div>
+        <div class="scores">
+            <p id="usagescore"></p>
         </div>
     </div>
     <div id="actions">
@@ -76,8 +82,10 @@
         let su = parseInt(document.getElementById("sunum").value)
 
         let denom = yes + no + su
+        let empty = false
         if (denom == 0) {
             denom = 1
+            empty = true
         }
         let signups = ((yes / denom) * 100).toFixed(2)
         document.getElementById("signupnum").innerHTML = String(signups) + "%"
@@ -92,6 +100,65 @@
 
         document.getElementById("publish-su").value = document.getElementById("sunum").value
         document.getElementById("suspend-su").value = document.getElementById("sunum").value
+
+        let signupscore = 0
+        let usagescore = 0
+        if (signups > 10) {
+            while (true) {
+                if (((yes / (denom + signupscore)) * 100) < 10) {
+                    document.getElementById("signupscore").innerHTML = "+" + signupscore
+                    document.getElementById("signupscore").style.color = "green"
+                    break
+                }
+                signupscore++
+            }
+        }
+        else if (signups < 10) {
+            while (true) {
+                if ((((yes + signupscore) / (denom + signupscore)) * 100) >= 10) {
+                    document.getElementById("signupscore").innerHTML = "-" + signupscore
+                    document.getElementById("signupscore").style.color = "red"
+                    break
+                }
+                signupscore++
+            }
+        }
+        else {
+            document.getElementById("signupscore").innerHTML = "+" + 1
+            document.getElementById("signupscore").style.color = "green"
+        }
+
+        if (empty == true) {
+            document.getElementById("usagescore").innerHTML = "-" + 1
+            document.getElementById("usagescore").style.color = "red"
+        }
+        else if (usage > 60) {
+            while (true) {
+                if ((((yes + su) / (denom + usagescore)) * 100) < 60) {
+                    document.getElementById("usagescore").innerHTML = "+" + usagescore
+                    document.getElementById("usagescore").style.color = "green"
+                    break
+                }
+                usagescore++
+            }
+        }
+        else if (usage < 60) {
+            while (true) {
+                if ((((yes + su + usagescore) / (denom + usagescore)) * 100) >= 60) {
+                    document.getElementById("usagescore").innerHTML = "-" + usagescore
+                    document.getElementById("usagescore").style.color = "red"
+                    break
+                }
+                usagescore++
+            }
+        }
+        else {
+            document.getElementById("usagescore").innerHTML = "+" + 1
+            document.getElementById("usagescore").style.color = "green"
+        }
+
+
+
     }
     function plusyes() {
         let num = parseInt(document.getElementById("yesnum").value)

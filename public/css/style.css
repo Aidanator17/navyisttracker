@@ -25,6 +25,14 @@
     gap: 10px;
 }
 
+.infotitle{
+    margin-bottom: 0;
+}
+.scores *{
+    margin-bottom: 0;
+    font-size: larger;
+}
+
 .btn-block+.btn-block{
     margin-top: 0%;
 }
