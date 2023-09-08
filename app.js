@@ -46,24 +46,25 @@ app.get("/", async (req, res) => {
   catch {
     alive = false
   }
-  
+console.log(parseInt(process.env.testPORT), String(process.env.testIP))
   if (alive) {
-  let values
-  if (req.query.yes == undefined) {
-    values = {
-      yes: 0,
-      no: 0,
-      su: 0
+    let values
+    if (req.query.yes == undefined) {
+      values = {
+        yes: 0,
+        no: 0,
+        su: 0
+      }
     }
-  }
-  else {
-    values = {
-      yes: req.query.yes,
-      no: req.query.no,
-      su: req.query.su
+    else {
+      values = {
+        yes: req.query.yes,
+        no: req.query.no,
+        su: req.query.su
+      }
     }
+    res.render("index", { values })
   }
-  res.render("index", { values })}
   else {
     res.render("offline")
   }
