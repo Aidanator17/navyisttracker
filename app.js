@@ -40,14 +40,18 @@ app.get("/", async (req, res) => {
   const socket = new net.Socket()
   const promiseSocket = new PromiseSocket(socket)
   let alive = true
-  console.log(parseInt(process.env.testPORT), String(process.env.testIP))
   try {
+    console.log(1)
     await promiseSocket.connect(parseInt(process.env.testPORT), String(process.env.testIP))
+    console.log(2)
   }
   catch {
+    console.log(3)
     alive = false
   }
+  console.log(4)
   if (alive) {
+    console.log(5)
     let values
     if (req.query.yes == undefined) {
       values = {
@@ -66,6 +70,7 @@ app.get("/", async (req, res) => {
     res.render("index", { values })
   }
   else {
+    console.log(6)
     res.render("offline")
   }
 })
