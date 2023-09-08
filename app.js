@@ -40,13 +40,13 @@ app.get("/", async (req, res) => {
   const socket = new net.Socket()
   const promiseSocket = new PromiseSocket(socket)
   let alive = true
+  console.log(parseInt(process.env.testPORT), String(process.env.testIP))
   try {
     await promiseSocket.connect(parseInt(process.env.testPORT), String(process.env.testIP))
   }
   catch {
     alive = false
   }
-console.log(parseInt(process.env.testPORT), String(process.env.testIP))
   if (alive) {
     let values
     if (req.query.yes == undefined) {
