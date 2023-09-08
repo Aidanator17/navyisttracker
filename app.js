@@ -7,7 +7,8 @@ const prisma = new PrismaClient()
 const prisma_functions = require("./prisma/prisma_controller");
 const { stat } = require('fs');
 const url = "https://wild-rose-antelope-veil.cyclic.cloud/"
-
+const net = require('net');
+const { PromiseSocket } = require("promise-socket")
 
 const app = express();
 
@@ -33,8 +34,20 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 app.get("/", async (req, res) => {
+
+
+  const socket = new net.Socket()
+  const promiseSocket = new PromiseSocket(socket)
+  let alive = true
+  try {
+    await promiseSocket.connect(parseInt(process.env.testPORT), String(process.env.testIP))
+  }
+  catch {
+    alive = false
+  }
+  
+  if (alive) {
   let values
   if (req.query.yes == undefined) {
     values = {
@@ -50,7 +63,10 @@ app.get("/", async (req, res) => {
       su: req.query.su
     }
   }
-  res.render("index", { values })
+  res.render("index", { values })}
+  else {
+    res.render("offline")
+  }
 })
 
 app.post("/", async (req, res) => {
@@ -102,18 +118,18 @@ app.get("/rundown", async (req, res) => {
 
   const data = (await prisma_functions.rundown("2938068")).reverse()
   const stats = {
-    trans_count:0,
-    total_yes:0,
-    total_no:0,
-    total_su:0,
-    signup_per:undefined,
-    usage_per:undefined,
-    recent_trans_count:0,
-    recent_yes:0,
-    recent_no:0,
-    recent_su:0,
-    recent_signup_per:undefined,
-    recent_usage_per:undefined,
+    trans_count: 0,
+    total_yes: 0,
+    total_no: 0,
+    total_su: 0,
+    signup_per: undefined,
+    usage_per: undefined,
+    recent_trans_count: 0,
+    recent_yes: 0,
+    recent_no: 0,
+    recent_su: 0,
+    recent_signup_per: undefined,
+    recent_usage_per: undefined,
   }
 
   for (item in data) {
@@ -122,7 +138,7 @@ app.get("/rundown", async (req, res) => {
     stats.total_yes = stats.total_yes + data[item].yes
     stats.total_no = stats.total_no + data[item].no
     stats.total_su = stats.total_su + data[item].su
-    if (item<recent_cap){
+    if (item < recent_cap) {
       stats.recent_trans_count = stats.recent_trans_count + data[item].total_trans
       stats.recent_yes = stats.recent_yes + data[item].yes
       stats.recent_no = stats.recent_no + data[item].no
@@ -139,11 +155,11 @@ app.get("/rundown", async (req, res) => {
 
   }
 
-  stats.signup_per = String(((stats.total_yes/stats.trans_count)*100).toFixed(2))+"%"
-  stats.usage_per = String((((stats.total_yes+stats.total_su)/stats.trans_count)*100).toFixed(2))+"%"
+  stats.signup_per = String(((stats.total_yes / stats.trans_count) * 100).toFixed(2)) + "%"
+  stats.usage_per = String((((stats.total_yes + stats.total_su) / stats.trans_count) * 100).toFixed(2)) + "%"
 
-  stats.recent_signup_per = String(((stats.recent_yes/stats.recent_trans_count)*100).toFixed(2))+"%"
-  stats.recent_usage_per = String((((stats.recent_yes+stats.recent_su)/stats.recent_trans_count)*100).toFixed(2))+"%"
+  stats.recent_signup_per = String(((stats.recent_yes / stats.recent_trans_count) * 100).toFixed(2)) + "%"
+  stats.recent_usage_per = String((((stats.recent_yes + stats.recent_su) / stats.recent_trans_count) * 100).toFixed(2)) + "%"
 
   res.render("rundown", { data, stats, recent_cap })
 })
