@@ -8,90 +8,275 @@
 </head>
 
 <body>
-    <h2 class="page-title" style="margin: 0;">Rundown</h2><p class="page-subtitle">(<%= data.length %> publishes)</p>
-    <div id='rundown-grid'>
-        <h4>Date</h4>
-        <h4>Sign Up %</h4>
-        <h4>Yes</h4>
-        <h4>No</h4>
-        <h4>SU</h4>
-        <h4>Usage</h4>
-        <% for (day in data){ %>
-            <p class="rundown-item">
-                <%= data[day].date %>
-            </p>
-            <p class="rundown-item">
-                <%= data[day].su_percent %>
-            </p>
-            <p class="rundown-item">
-                <%= data[day].yes %>
-            </p>
-            <p class="rundown-item">
-                <%= data[day].no %>
-            </p>
-            <p class="rundown-item">
-                <%= data[day].su %>
-            </p>
-            <p class="rundown-item">
-                <%= data[day].usage_percent %>
-            </p>
-            <% } %>
+    <h2 class="page-title" style="margin: 0;">Rundown</h2>
+    <p class="page-subtitle">(<%= data.length %> publishes)</p>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button id="totalsbutton" class="btn btn-secondary" onclick="openTotals()">Totals</button>
+        <button id="daysbutton" class="btn btn-primary" onclick="openDays()">Days</button>
     </div>
-    <div id="totals-grid">
-        <h4 class="stats-title stats-left">Total</h4>
-        <h4 class="stats-title">Stats</h4>        
-        <p class="rundown-item stats-left">Sign up %</p>
-        <p class="rundown-item stat-value">
-            <%= stats.signup_per %>
-        </p>
-        <p class="rundown-item stats-left">Usage</p>
-        <p class="rundown-item stat-value">
-            <%= stats.usage_per %>
-        </p>
-        <p class="rundown-item stats-left">Total Trans</p>
-        <p class="rundown-item stat-value">
-            <%= stats.trans_count %>
-        </p>
-        <p class="rundown-item stats-left">Yes</p>
-        <p class="rundown-item stat-value">
-            <%= stats.total_yes %>
-        </p>
-        <p class="rundown-item stats-left">No</p>
-        <p class="rundown-item stat-value">
-            <%= stats.total_no %>
-        </p>
-        <p class="rundown-item stats-left">SU</p>
-        <p class="rundown-item stat-value">
-            <%= stats.total_su %>
-        </p>
+    <div id="totals">
+        <div id='rundown-grid'>
+            <h4>Date</h4>
+            <h4>Sign Up %</h4>
+            <h4>Yes</h4>
+            <h4>No</h4>
+            <h4>SU</h4>
+            <h4>Usage</h4>
+            <% for (day in data){ %>
+                <p class="rundown-item">
+                    <%= data[day].datestring %>
+                </p>
+                <p class="rundown-item">
+                    <%= data[day].su_percent %>
+                </p>
+                <p class="rundown-item">
+                    <%= data[day].yes %>
+                </p>
+                <p class="rundown-item">
+                    <%= data[day].no %>
+                </p>
+                <p class="rundown-item">
+                    <%= data[day].su %>
+                </p>
+                <p class="rundown-item">
+                    <%= data[day].usage_percent %>
+                </p>
+                <% } %>
+        </div>
+        <div id="totals-grid">
+            <h4 class="stats-title stats-left">Total</h4>
+            <h4 class="stats-title">Stats</h4>
+            <p class="rundown-item stats-left">Sign up %</p>
+            <p class="rundown-item stat-value">
+                <%= stats.signup_per %>
+            </p>
+            <p class="rundown-item stats-left">Usage</p>
+            <p class="rundown-item stat-value">
+                <%= stats.usage_per %>
+            </p>
+            <p class="rundown-item stats-left">Total Trans</p>
+            <p class="rundown-item stat-value">
+                <%= stats.trans_count %>
+            </p>
+            <p class="rundown-item stats-left">Yes</p>
+            <p class="rundown-item stat-value">
+                <%= stats.total_yes %>
+            </p>
+            <p class="rundown-item stats-left">No</p>
+            <p class="rundown-item stat-value">
+                <%= stats.total_no %>
+            </p>
+            <p class="rundown-item stats-left">SU</p>
+            <p class="rundown-item stat-value">
+                <%= stats.total_su %>
+            </p>
+        </div>
+        <div id="recents-grid">
+            <h4 class="stats-title stats-left">Recent</h4>
+            <h4 class="stats-title">Stats</h4>
+            <p class="rundown-item stats-left">(based on <%= recent_cap %>
+            </p>
+            <p class="rundown-item">past publishes)</p>
+            <p class="rundown-item stats-left">Sign up %</p>
+            <p class="rundown-item stat-value">
+                <%= stats.recent_signup_per %>
+            </p>
+            <p class="rundown-item stats-left">Usage</p>
+            <p class="rundown-item stat-value">
+                <%= stats.recent_usage_per %>
+            </p>
+            <p class="rundown-item stats-left">Total Trans</p>
+            <p class="rundown-item stat-value">
+                <%= stats.recent_trans_count %>
+            </p>
+            <p class="rundown-item stats-left">Yes</p>
+            <p class="rundown-item stat-value">
+                <%= stats.recent_yes %>
+            </p>
+            <p class="rundown-item stats-left">No</p>
+            <p class="rundown-item stat-value">
+                <%= stats.recent_no %>
+            </p>
+            <p class="rundown-item stats-left">SU</p>
+            <p class="rundown-item stat-value">
+                <%= stats.recent_su %>
+            </p>
+        </div>
     </div>
-    <div id="recents-grid">
-        <h4 class="stats-title stats-left">Recent</h4><h4 class="stats-title">Stats</h4>
-        <p class="rundown-item stats-left">(based on <%= recent_cap %></p><p class="rundown-item">past publishes)</p>
-        <p class="rundown-item stats-left">Sign up %</p>
-        <p class="rundown-item stat-value">
-            <%= stats.recent_signup_per %>
-        </p>
-        <p class="rundown-item stats-left">Usage</p>
-        <p class="rundown-item stat-value">
-            <%= stats.recent_usage_per %>
-        </p>
-        <p class="rundown-item stats-left">Total Trans</p>
-        <p class="rundown-item stat-value">
-            <%= stats.recent_trans_count %>
-        </p>
-        <p class="rundown-item stats-left">Yes</p>
-        <p class="rundown-item stat-value">
-            <%= stats.recent_yes %>
-        </p>
-        <p class="rundown-item stats-left">No</p>
-        <p class="rundown-item stat-value">
-            <%= stats.recent_no %>
-        </p>
-        <p class="rundown-item stats-left">SU</p>
-        <p class="rundown-item stat-value">
-            <%= stats.recent_su %>
-        </p>
+    <div id="day" style="display: none;">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button id="week-button" class="btn btn-secondary" onclick="openWeek()">Week</button>
+            <button id="signup-button" class="btn btn-primary" onclick="openSignups()">Signups</button>
+            <button id="usage-button" class="btn btn-primary" onclick="openUsage()">Usage</button>
+            <button id="trans-button" class="btn btn-primary" onclick="openTrans()">Trans</button>
+        </div>
+        <div class="week-grid" id="day-week-grid">
+            <h4>Day</h4>
+            <h4>Sign Up %</h4>
+            <h4>Yes</h4>
+            <h4>No</h4>
+            <h4>SU</h4>
+            <h4>Usage</h4>
+            <% for (day in weekStats){ %>
+                <p class="rundown-item">
+                    <%= weekStats[day].str %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats[day].signup_per %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats[day].yes %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats[day].no %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats[day].su %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats[day].usage_per %>
+                </p>
+                <% } %>
+        </div>
+        <div class="week-grid" id="day-signup-grid" style="display: none;">
+            <h4>Day</h4>
+            <h4>Sign Up %</h4>
+            <h4>Yes</h4>
+            <h4>No</h4>
+            <h4>SU</h4>
+            <h4>Usage</h4>
+            <% for (day in weekStats_signup){ %>
+                <p class="rundown-item">
+                    <%= weekStats_signup[day].str %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_signup[day].signup_per %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_signup[day].yes %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_signup[day].no %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_signup[day].su %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_signup[day].usage_per %>
+                </p>
+                <% } %>
+        </div>
+        <div class="week-grid" id="day-usage-grid" style="display: none;">
+            <h4>Day</h4>
+            <h4>Sign Up %</h4>
+            <h4>Yes</h4>
+            <h4>No</h4>
+            <h4>SU</h4>
+            <h4>Usage</h4>
+            <% for (day in weekStats_usage){ %>
+                <p class="rundown-item">
+                    <%= weekStats_usage[day].str %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_usage[day].signup_per %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_usage[day].yes %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_usage[day].no %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_usage[day].su %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_usage[day].usage_per %>
+                </p>
+                <% } %>
+        </div>
+        <div class="week-grid" id="day-trans-grid" style="display: none;">
+            <h4>Day</h4>
+            <h4>Sign Up %</h4>
+            <h4>Yes</h4>
+            <h4>No</h4>
+            <h4>SU</h4>
+            <h4>Usage</h4>
+            <% for (day in weekStats_trans){ %>
+                <p class="rundown-item">
+                    <%= weekStats_trans[day].str %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_trans[day].signup_per %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_trans[day].yes %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_trans[day].no %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_trans[day].su %>
+                </p>
+                <p class="rundown-item">
+                    <%= weekStats_trans[day].usage_per %>
+                </p>
+                <% } %>
+        </div>
     </div>
     <footer><a href="/" class="btn btn-info">Back</a></footer>
 </body>
+
+<script>
+    let active = "week"
+    function swapButton(id){
+        if (document.getElementById(id).classList.contains("btn-primary")){
+        document.getElementById(id).classList.remove("btn-primary")
+        document.getElementById(id).classList.add("btn-secondary")
+        }
+        else {
+        document.getElementById(id).classList.add("btn-primary")
+        document.getElementById(id).classList.remove("btn-secondary")
+        }
+    }
+    function openTotals() {
+        swapButton("totalsbutton")
+        swapButton("daysbutton")
+        document.getElementById("totals").style = ""
+        document.getElementById("day").style = "display: none;"
+
+    }
+    function openDays() {
+        swapButton("totalsbutton")
+        swapButton("daysbutton")
+        document.getElementById("totals").style = "display: none;"
+        document.getElementById("day").style = ""
+    }
+    function openWeek(){
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = "display: none;"
+        active = "week"
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = ""
+    }
+    function openSignups(){
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = "display: none;"
+        active = "signup"
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = ""
+    }
+    function openUsage(){
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = "display: none;"
+        active = "usage"
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = ""
+    }
+    function openTrans(){
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = "display: none;"
+        active = "trans"
+        swapButton(active+"-button")
+        document.getElementById("day-"+active+"-grid").style = ""
+    }
+</script>

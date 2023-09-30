@@ -73,6 +73,22 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+.week-grid{
+    margin-top: 10px;
+    height: 210px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    background-color: white;
+    overflow-y:auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#day-facts {
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: white;
+}
 .rundown-item {
     margin: 0;
 }
