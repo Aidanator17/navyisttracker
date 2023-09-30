@@ -73,6 +73,9 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+#week-buttons{
+    margin-top: 5px;
+}
 .week-grid{
     margin-top: 10px;
     height: 210px;
