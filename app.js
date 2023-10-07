@@ -168,6 +168,8 @@ app.get("/rundown", async (req, res) => {
     best_signup_str:"",
     best_usage:0,
     best_usage_str:"",
+    best_conv:0,
+    best_conv_str:"",
   }
   const data = (await prisma_functions.rundown("2938068")).reverse()
   const stats = {
@@ -249,14 +251,18 @@ app.get("/rundown", async (req, res) => {
     let total = weekStats[day].yes + weekStats[day].no + weekStats[day].su
     let yes_percentage = (weekStats[day].yes / total) * 100
     let su_percentage = ((weekStats[day].yes+weekStats[day].su) / total) * 100
+    let conv_percentage = ((weekStats[day].yes) / (weekStats[day].yes+weekStats[day].no)) * 100
     weekStats[day].signup_per = String(yes_percentage.toFixed(2))+"%"
     weekStats[day].usage_per = String(su_percentage.toFixed(2))+"%"
+    weekStats[day].conv_per = String(conv_percentage.toFixed(2))+"%"
   }
   stats.signup_per = String(((stats.total_yes / stats.trans_count) * 100).toFixed(2)) + "%"
   stats.usage_per = String((((stats.total_yes + stats.total_su) / stats.trans_count) * 100).toFixed(2)) + "%"
+  stats.conv_per = String((((stats.total_yes) / (stats.total_yes + stats.total_no)) * 100).toFixed(2)) + "%"
 
   stats.recent_signup_per = String(((stats.recent_yes / stats.recent_trans_count) * 100).toFixed(2)) + "%"
   stats.recent_usage_per = String((((stats.recent_yes + stats.recent_su) / stats.recent_trans_count) * 100).toFixed(2)) + "%"
+  stats.recent_conv_per = String((((stats.recent_yes) / (stats.recent_yes + stats.recent_no)) * 100).toFixed(2)) + "%"
 
   for (day in weekStats) {
     if ((weekStats[day].yes+weekStats[day].no+weekStats[day].su)>weekFacts.most_trans){
@@ -271,6 +277,10 @@ app.get("/rundown", async (req, res) => {
       weekFacts.best_usage = parseFloat(weekStats[day].usage_per.replace('%',''))
       weekFacts.best_usage_str = weekStats[day].str
     }
+    if (parseFloat(weekStats[day].conv_per.replace('%',''))>weekFacts.best_conv){
+      weekFacts.best_conv = parseFloat(weekStats[day].conv_per.replace('%',''))
+      weekFacts.best_conv_str = weekStats[day].str
+    }
   }
 
   function calculateTotal(obj) {
@@ -280,16 +290,19 @@ app.get("/rundown", async (req, res) => {
   const byTotal = { ...weekStats };
   const bySignupPer = { ...weekStats };
   const byUsagePer = { ...weekStats };
+  const byConvPer = { ...weekStats };
 
   const sortedByTotal = Object.entries(byTotal).sort((a, b) => calculateTotal(b[1]) - calculateTotal(a[1]));
   const sortedBySignupPer = Object.entries(bySignupPer).sort((a, b) => parseFloat(b[1].signup_per) - parseFloat(a[1].signup_per));
   const sortedByUsagePer = Object.entries(byUsagePer).sort((a, b) => parseFloat(b[1].usage_per) - parseFloat(a[1].usage_per));
+  const sortedByConvPer = Object.entries(byConvPer).sort((a, b) => parseFloat(b[1].conv_per) - parseFloat(a[1].conv_per));
   
   const weekStats_trans = Object.fromEntries(sortedByTotal);
   const weekStats_signup = Object.fromEntries(sortedBySignupPer);
   const weekStats_usage = Object.fromEntries(sortedByUsagePer);
+  const weekStats_conv = Object.fromEntries(sortedByConvPer);
 
-  res.render("rundown", { data, stats, recent_cap, weekStats, weekStats_trans, weekStats_signup, weekStats_usage, weekFacts })
+  res.render("rundown", { data, stats, recent_cap, weekStats, weekStats_trans, weekStats_signup, weekStats_usage, weekStats_conv,weekFacts })
 })
 
 const PORT = process.env.PORT || 8000;

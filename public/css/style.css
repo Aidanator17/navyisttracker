@@ -80,11 +80,12 @@
     margin-top: 10px;
     height: 210px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     background-color: white;
     overflow-y:auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    /* gap: 5px; */
 }
 #day-facts {
     margin-top: 10px;
